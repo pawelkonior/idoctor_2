@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Third-party
 
     # Local
+    'users.apps.UsersConfig',
     'home.apps.HomeConfig',
 ]
 
@@ -127,6 +128,8 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
