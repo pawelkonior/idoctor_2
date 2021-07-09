@@ -8,7 +8,7 @@
 
 ## Dictionary
 - CDN - content delivery network
-
+- TDD - test driven development (red-green-refactor)
 
 
 ----------------------------------------------------------------------------
