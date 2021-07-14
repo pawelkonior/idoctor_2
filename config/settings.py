@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = int(os.environ.get("DJANGO_DEBUG", default=0))
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
-
+INTERNAL_IPS = ALLOWED_HOSTS
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third-party
+    'debug_toolbar',
     'crispy_forms',
     'crispy_bootstrap5',
     'allauth',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -153,6 +155,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -163,3 +167,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: not request.is_ajax()
+}
