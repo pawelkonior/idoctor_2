@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% block title %}- Rooms{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="hdl-primary">Welcome Rooms</h1>
+
+        <ul>
+            {% for room in rooms %}
+                <li>Room {{ room.room_no }}, on floor {{ room.floor }}.</li>
+            {% empty %}
+                <li>No rooms added yet.</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+
+{% endblock %}

@@ -27,5 +27,6 @@ urlpatterns = [
     # Local apps
     path('accounts/', include('users.urls')),
     path('', include('home.urls')),
+    path('rooms/', include('rooms.urls')),
 
 ]
