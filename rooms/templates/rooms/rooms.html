@@ -1,19 +1,35 @@
 {% extends '_base.html' %}
+{% load custom_template_tags %}
 
 {% block title %}- Rooms{% endblock %}
 
 {% block content %}
 
     <div class="container">
-        <h1 class="hdl-primary">Welcome Rooms</h1>
+        <h1 class="hdl-primary">Rooms list</h1>
 
-        <ul>
+
+        <ol class="list-group list-group-numbered">
             {% for room in rooms %}
-                <li>Room {{ room.room_no }}, on floor {{ room.floor }}.</li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Room number: {{ room.room_no }}</div>
+                        {% for av in  room.availability_set.all %}
+
+                            <div class="mb-2">
+                                <span class="badge rounded-pill bg-{% make_color av.book_type %}">{{ av.get_book_type_display }}</span>
+                                {{ av.start_date }}
+                                {{ av.duration }}
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{ room.floor }} floor</span>
+                </li>
             {% empty %}
                 <li>No rooms added yet.</li>
             {% endfor %}
-        </ul>
+        </ol>
 
     </div>
 
