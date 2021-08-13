@@ -27,7 +27,6 @@ DEBUG = int(os.environ.get("DJANGO_DEBUG", default=0))
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 INTERNAL_IPS = ALLOWED_HOSTS
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,10 +44,12 @@ INSTALLED_APPS = [
     'allauth.account',
 
     # Local
-    'users.apps.UsersConfig',
     'home.apps.HomeConfig',
+    'newsletter.apps.NewsletterConfig',
     'rooms.apps.RoomsConfig',
+    'users.apps.UsersConfig',
 ]
+
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
