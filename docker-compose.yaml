@@ -22,6 +22,9 @@ services:
       - "DB_PASSWORD=postgres"
       - "DB_HOST=db"
       - "DB_PORT=5432"
+      - "DJANGO_SU_NAME=a"
+      - "DJANGO_SU_EMAIL=a@a.pl"
+      - "DJANGO_SU_PASSWORD=a"
   db:
     image: library/postgres:13-alpine
     networks:
