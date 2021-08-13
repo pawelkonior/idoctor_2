@@ -8,22 +8,26 @@ def generate_superuser(apps, schema_editor):
     from users.models import Nationality
     User = get_user_model()
 
-    nationality = Nationality.objects.create(iso='ENG', full_name="England")
+    nationality = Nationality.objects.create(iso='EN', full_name='England')
+    from users.models import Address
+    address = Address.objects.create(street='baker', building_number='1', flat_number='1', zip_code='1234',
+                                     city='Pekin', country='China')
 
-    DJANGO_SU_NAME = os.environ.get('DJANGO_SU_NAME')
-    DJANGO_SU_EMAIL = os.environ.get('DJANGO_SU_EMAIL')
-    DJANGO_SU_PASSWORD = os.environ.get('DJANGO_SU_PASSWORD')
+    from users.models import QueuePriority
+    queue_priority = QueuePriority.objects.create(name='basic', level=0)
+    # DJANGO_SU_NAME = os.environ.get('DJANGO_SU_NAME')
+    # DJANGO_SU_EMAIL = os.environ.get('DJANGO_SU_EMAIL')
+    # DJANGO_SU_PASSWORD = os.environ.get('DJANGO_SU_PASSWORD')
 
     superuser = User.objects.create_superuser(
-        username=DJANGO_SU_NAME,
-        email=DJANGO_SU_EMAIL,
-        password=DJANGO_SU_PASSWORD,
+        username='a',
+        email='p@p.pl',
+        password='testpass123',
         birthday='2021-10-10',
         gender=1,
         personal_identity_number='',
-        address=1,
         nationality=nationality,
-        queue_priority=1
+        queue_priority=queue_priority
     )
 
     superuser.save()
