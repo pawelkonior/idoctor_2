@@ -28,5 +28,6 @@ urlpatterns = [
     path('accounts/', include('users.urls')),
     path('', include('home.urls')),
     path('rooms/', include('rooms.urls')),
+    path('newsletters/', include('newsletter.urls')),
 
 ]

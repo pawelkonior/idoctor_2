@@ -28,10 +28,20 @@ class AgreementLog(models.Model):
         return f'Agreement: {self.agreement}, updated at: {self.updated_at:%d-%m-%y}, status: {self.status}'
 
 
+class AgreementManager(models.query.QuerySet):
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        AgreementLog.objects.bulk_create([
+            AgreementLog(agreement=agreement, status=agreement.agreed) for agreement in self
+        ])
+
+
 class Agreement(models.Model):
     category = models.ForeignKey('NewsletterCategory', on_delete=models.DO_NOTHING, related_name='agreement_category')
     email = models.ForeignKey('NewsletterUser', on_delete=models.DO_NOTHING, related_name='agreement_email')
     agreed = models.BooleanField(default=False)
+
+    objects = AgreementManager.as_manager()
 
     def __str__(self):
         return f'Email: {self.email}, category: {self.category}'
